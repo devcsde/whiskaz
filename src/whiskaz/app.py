@@ -42,6 +42,7 @@ from whiskaz.overlay import RecordingOverlay, overlay_position
 from whiskaz.paths import asset_path
 from whiskaz.settings import (
     ANCHOR_CHOICES,
+    AUTO_SEND_CHOICES,
     DEFAULT_HOTKEY,
     HOTKEY_CHOICES,
     LANGUAGE_CHOICES,
@@ -125,7 +126,7 @@ class MainWindow(QMainWindow):
         self._state = "loading"  # loading, idle, recording, busy
         self._requested_model = self.settings.model
         self._listener: HotkeyListener | None = None
-        self._paster = Paster(QApplication.clipboard(), self.settings.terminal_paste)
+        self._paster = Paster(QApplication.clipboard(), self.settings.terminal_paste, self.settings.auto_send)
         self._tray: QSystemTrayIcon | None = None
 
         self._build_ui()
@@ -293,6 +294,19 @@ class MainWindow(QMainWindow):
         self.terminal_check = QCheckBox("Ctrl+Shift+V statt Ctrl+V einfügen (für Terminals)")
         self.terminal_check.setChecked(self.settings.terminal_paste)
         form.addRow("", self.terminal_check)
+
+        self.auto_send_box = QComboBox()
+        for value, label in AUTO_SEND_CHOICES:
+            self.auto_send_box.addItem(label, value)
+        self.auto_send_box.setCurrentIndex(max(0, self.auto_send_box.findData(self.settings.auto_send)))
+        self.auto_send_box.setToolTip("Sendet nach dem Einfügen automatisch eine Taste, z. B. zum Absenden im Chat.")
+        form.addRow("Nach dem Einfügen senden:", self.auto_send_box)
+
+        auto_send_note = QLabel(
+            "Achtung: Mit aktiviertem Senden wird der Text sofort abgeschickt, ohne dass du ihn vorher prüfen kannst."
+        )
+        auto_send_note.setWordWrap(True)
+        form.addRow("", auto_send_note)
 
         self.mode_box = QComboBox()
         for value, label in MODE_CHOICES:
@@ -652,6 +666,7 @@ class MainWindow(QMainWindow):
         self.settings.model = self.model_box.currentText()
         self.settings.language = self.language_box.currentText()
         self.settings.terminal_paste = self.terminal_check.isChecked()
+        self.settings.auto_send = self.auto_send_box.currentData()
         self.settings.mode = self.mode_box.currentData()
         self.settings.overlay_enabled = self.overlay_check.isChecked()
         anchor = self.anchor_box.currentData()
@@ -659,7 +674,7 @@ class MainWindow(QMainWindow):
             self.settings.overlay_pos = None  # neue Startposition verwirft die gespeicherte
         self.settings.overlay_anchor = anchor
         self.settings.save()
-        self._paster = Paster(QApplication.clipboard(), self.settings.terminal_paste)
+        self._paster = Paster(QApplication.clipboard(), self.settings.terminal_paste, self.settings.auto_send)
         self._start_hotkey()
         if self.settings.model != self._requested_model:
             self._load_model(self.settings.model)

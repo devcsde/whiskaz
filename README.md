@@ -84,6 +84,7 @@ Tipps:
 
 - Im Modus **Umschalten** lässt sich die Taste nach dem ersten Druck loslassen. Erst der nächste Druck stoppt die Aufnahme.
 - Das Overlay zeigt während der Aufnahme eine rote Lampe und den Pegel. Verschieben geht mit der Maus, die Position wird gespeichert. Unter **Einstellungen** wählst du eine Startposition oder schaltest das Overlay aus.
+- Unter **Einstellungen** kannst du „Nach dem Einfügen senden“ auf **Enter** oder **Strg+Enter** stellen. Dann wird der Text nach dem Einfügen direkt abgeschickt, etwa im Chat. Standard ist **Aus**. Der Text wird dann ohne Prüfung abgeschickt, nutze die Option also nur, wenn du dem Ergebnis vertraust.
 - Taste unter etwa 0,3 s gilt als Versehen und wird ignoriert.
 - Drückst du während des Haltens eine andere Taste, etwa Strg+C, wird die Aufnahme abgebrochen.
 - In Terminals fügt Strg+V oft nicht ein. Aktiviere dann unter **Einstellungen** „Ctrl+Shift+V statt Ctrl+V einfügen“.

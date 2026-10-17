@@ -30,6 +30,7 @@ MODE_CHOICES = [
     ("toggle", "Umschalten: einmal drücken startet, nochmal drücken stoppt"),
 ]
 ANCHOR_CHOICES = [("left", "Oben links"), ("center", "Oben Mitte"), ("right", "Oben rechts")]
+AUTO_SEND_CHOICES = [("off", "Aus"), ("enter", "Enter"), ("ctrl_enter", "Strg+Enter")]
 
 
 @dataclass
@@ -38,6 +39,7 @@ class Settings:
     model: str = "small"
     language: str = "de"
     terminal_paste: bool = False
+    auto_send: str = "off"  # off | enter | ctrl_enter
     mode: str = "hold"  # hold | toggle
     overlay_enabled: bool = True
     overlay_anchor: str = "center"  # left | center | right, gilt ohne gespeicherte Position
