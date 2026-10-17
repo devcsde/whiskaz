@@ -1,0 +1,33 @@
+name: macOS-App
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: librsvg installieren
+        run: brew install librsvg
+
+      - name: Tests
+        run: |
+          python3 -m pip install -e ".[dev]"
+          python3 -m pytest -q
+
+      - name: App bauen
+        run: ./scripts/build-mac-app.sh
+
+      - name: ZIP als Artefakt hochladen
+        uses: actions/upload-artifact@v4
+        with:
+          name: whiskaz-macos
+          path: dist/whiskaz-*-macos.zip

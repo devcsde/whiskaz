@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=whiskaz
+GenericName=Diktierwerkzeug
+Comment=Lokales Push-to-talk-Diktat
+Exec=whiskaz
+Icon=whiskaz
+Terminal=false
+Categories=AudioVideo;Audio;
+Keywords=Diktat;Sprache;Spracherkennung;Dictation;Speech;
+StartupWMClass=whiskaz
