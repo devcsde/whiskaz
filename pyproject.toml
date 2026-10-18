@@ -8,6 +8,8 @@ version = "0.1.0"
 description = "Push-to-talk-Diktierwerkzeug mit lokaler Spracherkennung"
 readme = "README.md"
 requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [{ name = "devcs.de" }]
 dependencies = [
     "PySide6-Essentials>=6.5",
     "faster-whisper>=1.1",

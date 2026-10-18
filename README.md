@@ -120,4 +120,4 @@ Projektaufbau:
 
 ## Status
 
-Lizenz: noch nicht festgelegt.
+Autor: [devcs.de](https://devcs.de). Lizenz: MIT, siehe [LICENSE](LICENSE). Du darfst whiskaz nutzen, verändern und weitergeben, auch kommerziell. Der Copyright-Hinweis muss erhalten bleiben.
